@@ -7,23 +7,6 @@ A full-stack RAG (Retrieval Augmented Generation) agent built on Cloudflare Work
 
 ![Main Interface](./screenshot.png)
 
-## 📊 Evaluation & Benchmarking
-To ensure reliability and prevent hallucinations, I implemented an automated offline benchmarking pipeline.
-
-* **Methodology:** A "Golden Dataset" of 12 ground-truth Q&A pairs covering Behavioral, Technical (ML/Security), and Personal domains.
-* **Metric:** Semantic Similarity (Cosine Similarity) measured using the `all-MiniLM-L6-v2` embedding model.
-* **Performance:** The system achieved an **overall accuracy of 90.3%**, with near-perfect retrieval for Resume facts (93.9%) and ML concepts (91.3%).
-
-![Benchmark Results](./benchmark.png)
-
-You can reproduce these results by running the script in the `evaluation/` folder:
-```bash
-cd evaluation
-pip install -r requirements.txt
-python bulk_benchmark.py 
-```
-See [benchmark_results.csv](./evaluation/benchmark_results.csv) for the raw data.
-
 ## 🛠️ Tech Stack
 * **LLM:** Llama 3.3 70B (via Workers AI)
 * **Coordination:** Durable Objects (managing chat state and agent logic)
@@ -88,6 +71,22 @@ The agent retrieves the stored definition to answer complex reasoning questions.
     ```bash
     npm run dev
     ```
+## 📊 Evaluation & Benchmarking
+To ensure reliability and prevent hallucinations, I implemented an automated offline benchmarking pipeline.
+
+* **Methodology:** A "Golden Dataset" of 12 ground-truth Q&A pairs covering Behavioral, Technical (ML/Security), and Personal domains.
+* **Metric:** Semantic Similarity (Cosine Similarity) measured using the `all-MiniLM-L6-v2` embedding model.
+* **Performance:** The system achieved an **overall accuracy of 90.3%**, with near-perfect retrieval for Resume facts (93.9%) and ML concepts (91.3%).
+
+<img src="./benchmark.png" alt="Benchmark Results" width="600px">
+
+You can reproduce these results by running the script in the `evaluation/` folder:
+```bash
+cd evaluation
+pip install -r requirements.txt
+python bulk_benchmark.py 
+```
+See [benchmark_results.csv](./evaluation/benchmark_results.csv) for the raw data.
 
 ## 📂 Project Structure
 * `src/server.ts`: Main Worker and Durable Object logic (RAG implementation).
