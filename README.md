@@ -5,6 +5,8 @@ A full-stack RAG (Retrieval Augmented Generation) agent built on Cloudflare Work
 ## 🚀 Live Demo
 **[https://cf-ai-second-brain.rnazre.workers.dev](https://cf-ai-second-brain.rnazre.workers.dev)**
 
+![Main Interface](./screenshot.png)
+
 ## 🛠️ Tech Stack
 * **LLM:** Llama 3.3 70B (via Workers AI)
 * **Coordination:** Durable Objects (managing chat state and agent logic)
@@ -17,6 +19,22 @@ A full-stack RAG (Retrieval Augmented Generation) agent built on Cloudflare Work
 2.  **Study Guide Mode:** Users can save specific notes (STAR method stories, LeetCode patterns) using the `/learn` command.
 3.  **RAG / Memory:** The agent converts `/learn` inputs into vector embeddings (1024 dimensions) and stores them in Cloudflare Vectorize. When asked a question later, it retrieves the user's *specific* saved examples rather than generic advice.
 4.  **Persistent History:** Chat sessions are managed by Durable Objects, ensuring state consistency.
+
+## 🧠 Example Usage & Demo
+
+The system is designed to retain complex technical details and recall them during mock interviews.
+
+**1. Saving Knowledge (`/learn`)**
+The user stores a definition or behavioral story into the Vectorize database.
+> `/learn Concept: Big O notation...`
+
+![Saving Knowledge](./demo1.png)
+
+**2. Recalling & Reasoning**
+The agent retrieves the stored definition to answer complex reasoning questions.
+> **User:** "Which algorithm likely has better Big O complexity?"
+
+![Reasoning](./demo2.png)
 
 ## 🏃‍♂️ How to Run Locally
 
@@ -50,19 +68,6 @@ A full-stack RAG (Retrieval Augmented Generation) agent built on Cloudflare Work
     ```bash
     npm run dev
     ```
-
-## 🧠 Example Usage
-
-**1. Save a Behavioral Story (STAR Method):**
-> `/learn For the 'Conflict' question: I resolved a git merge dispute during the Hackathon by setting up a daily standup. Result: We shipped on time.`
-
-**2. Recall for Interview:**
-> **User:** "Give me a story about conflict resolution."
->
-> **Agent:** "Here is your saved example: During the Hackathon, you resolved a git merge dispute by instituting daily standups, which ensured the project shipped on time."
-
-**3. Save a Technical Concept:**
-> `/learn The difference between TCP and UDP is that TCP guarantees delivery (handshake) while UDP is connectionless and faster (video streaming).`
 
 ## 📂 Project Structure
 * `src/server.ts`: Main Worker and Durable Object logic (RAG implementation).
