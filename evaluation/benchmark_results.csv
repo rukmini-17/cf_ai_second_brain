@@ -1,0 +1,13 @@
+Category,Question,Score,Status
+Behavioral,Tell me about a time you handled a conflict.,0.8842079043388367,✅ PASS
+Behavioral,What is your greatest weakness?,0.8628777861595154,✅ PASS
+Behavioral,Describe a leadership experience.,0.8389626741409302,✅ PASS
+ML/AI,Define Big O Notation.,0.8141190409660339,✅ PASS
+ML/AI,What is Overfitting?,1.0,✅ PASS
+ML/AI,Explain Gradient Descent.,0.9246634244918823,✅ PASS
+Security,Difference between TCP and UDP?,0.8556689620018005,✅ PASS
+Security,What is SQL Injection?,1.0000001192092896,✅ PASS
+Security,Explain XSS (Cross-Site Scripting).,0.8430718183517456,✅ PASS
+Resume,Where did you intern in Summer 2024?,0.945983350276947,✅ PASS
+Resume,What is TERRA-CD?,0.973383903503418,✅ PASS
+Resume,What master's degree are you pursuing?,0.8979364633560181,✅ PASS
