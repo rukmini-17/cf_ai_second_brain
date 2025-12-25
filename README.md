@@ -79,7 +79,7 @@ To ensure reliability and prevent hallucinations, I implemented an automated off
 * **Performance:** The system achieved an **overall accuracy of 90.3%**, with near-perfect retrieval for Resume facts (93.9%) and ML concepts (91.3%).
 
 <p align="center">
-  <img src="./benchmark.png" alt="Benchmark Results" width="400px">
+  <img src="./benchmark.png" alt="Benchmark Results" width="500px">
 </p>
 
 You can reproduce these results by running the script in the `evaluation/` folder:
