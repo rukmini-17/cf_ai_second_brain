@@ -78,7 +78,9 @@ To ensure reliability and prevent hallucinations, I implemented an automated off
 * **Metric:** Semantic Similarity (Cosine Similarity) measured using the `all-MiniLM-L6-v2` embedding model.
 * **Performance:** The system achieved an **overall accuracy of 90.3%**, with near-perfect retrieval for Resume facts (93.9%) and ML concepts (91.3%).
 
-<img src="./benchmark.png" alt="Benchmark Results" width="600px">
+<p align="center">
+  <img src="./benchmark.png" alt="Benchmark Results" width="400px">
+</p>
 
 You can reproduce these results by running the script in the `evaluation/` folder:
 ```bash
