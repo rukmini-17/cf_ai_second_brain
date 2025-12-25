@@ -12,6 +12,14 @@ import { createWorkersAI } from "workers-ai-provider";
 import { tools } from "./tools";
 
 export class Chat extends AIChatAgent<Env> {
+
+  // 0. HANDLE NEW CONNECTIONS (The Greeting)
+  async onConnect(connection: any) {
+    connection.send(JSON.stringify({
+      role: "assistant",
+      content: "🎓 Interview Prep online. I'm ready to quiz you. Use `/learn` to save a LeetCode pattern or behavioral story, or ask me to recall one."
+    }));
+  }
   
   // 1. HANDLE INCOMING MESSAGES
   async onChatMessage(
@@ -26,8 +34,6 @@ export class Chat extends AIChatAgent<Env> {
       const textToLearn = userText.replace("/learn ", "");
       await this.learn(textToLearn);
       
-      // FIX: Use the AI model to generate the confirmation.
-      // This ensures the stream protocol matches exactly what the frontend expects.
       const workersai = createWorkersAI({ binding: this.env.AI });
       const model = workersai("@cf/meta/llama-3.3-70b-instruct-fp8-fast" as any);
 
@@ -35,8 +41,8 @@ export class Chat extends AIChatAgent<Env> {
         execute: async ({ writer }) => {
           const result = streamText({
             model,
-            // We give it a strict instruction to just say "Saved"
-            prompt: `Confirm that you have saved this note: "${textToLearn}". Reply with exactly: "🧠 I have saved that to my long-term memory!"`,
+            // UPDATED THEME: "Study Guide" instead of generic memory
+            prompt: `Confirm that you have saved this note: "${textToLearn}". Reply with exactly: "📚 Saved to your Study Guide!"`,
           });
           writer.merge(result.toUIMessageStream());
         }
@@ -51,19 +57,21 @@ export class Chat extends AIChatAgent<Env> {
     
     // Setup Llama
     const workersai = createWorkersAI({ binding: this.env.AI });
-    // (We use 'as any' here to stop TypeScript from complaining about the model name)
     const model = workersai("@cf/meta/llama-3.3-70b-instruct-fp8-fast" as any);
 
-    const systemPrompt = `You are the user's Second Brain. You are precise, sarcastic, and helpful.
+    const systemPrompt = `You are the "Interview Prep Companion," an AI assistant helping a Computer Science Master's student prepare for technical interviews.
 
-     RULES:
-      1. If the answer is in the CONTEXT below, answer confidently.
-      2. If the answer is NOT in the context, say: "I don't have that in my memory banks, boss."
-      3. Keep answers under 3 sentences unless asked for more.
+    Your goal is to help the user recall their own study notes, behavioral stories, and algorithm patterns.
 
-      CONTEXT FROM MEMORY:
-      ${context}
-     `;
+    context from your notes:
+    ${context}
+
+    Instructions:
+    1. When answering, prioritize the user's saved notes (from context). If they ask "What was my story about leadership?", find the specific anecdote they saved.
+    2. If the user uses /learn, confirm that you have added this to their "Study Guide."
+    3. Be encouraging but precise. If they ask a technical question, give a brief, high-quality answer suitable for an interview response.
+    
+    User Query: ${userText}`;
 
     const stream = createUIMessageStream({
       execute: async ({ writer }) => {
