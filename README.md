@@ -2,12 +2,12 @@
 
 A full-stack RAG (Retrieval Augmented Generation) agent built on Cloudflare Workers, Durable Objects, and Vectorize. It serves as a personalized "Interview Prep Companion" that helps students store and recall behavioral stories, algorithm patterns, and system design notes.
 
-## 🚀 Live Demo
+## >> Live Demo
 **[https://cf-ai-second-brain.rnazre.workers.dev](https://cf-ai-second-brain.rnazre.workers.dev)**
 
 ![Main Interface](./screenshot.png)
 
-## 🛠️ Tech Stack
+## >> Tech Stack
 * **LLM:** Llama 3.3 70B (via Workers AI)
 * **Coordination:** Durable Objects (managing chat state and agent logic)
 * **Memory:** Cloudflare Vectorize (Vector Database) + BGE-M3 Embeddings
@@ -15,14 +15,14 @@ A full-stack RAG (Retrieval Augmented Generation) agent built on Cloudflare Work
 * **Language:** TypeScript
 * **Evaluation:** Python (sentence-transformers, requests)
 
-## ✨ Features
+## >> Features
 1.  **Mock Interviewer:** Real-time streaming chat with Llama 3.3, customized to act as a supportive technical interviewer.
 2.  **Study Guide Mode:** Users can save specific notes (STAR method stories, LeetCode patterns) using the `/learn` command.
 3.  **RAG / Memory:** The agent converts `/learn` inputs into vector embeddings (1024 dimensions) and stores them in Cloudflare Vectorize. When asked a question later, it retrieves the user's *specific* saved examples rather than generic advice.
 4.  **Persistent History:** Chat sessions are managed by Durable Objects, ensuring state consistency.
 5.  **Automated QA:** Includes a Python-based evaluation suite to regression test the agent's memory. 
 
-## 🧠 Example Usage & Demo
+## >> Example Usage & Demo
 
 The system is designed to retain complex technical details and recall them during mock interviews.
 
@@ -38,7 +38,7 @@ The agent retrieves the stored definition to answer complex reasoning questions.
 
 ![Reasoning](./demo2.png)
 
-## 🏃‍♂️ How to Run Locally
+## >> How to Run Locally
 
 ### Prerequisites
 * Node.js & npm
@@ -71,7 +71,7 @@ The agent retrieves the stored definition to answer complex reasoning questions.
     ```bash
     npm run dev
     ```
-## 📊 Evaluation & Benchmarking
+## >> Evaluation & Benchmarking
 To ensure reliability and prevent hallucinations, I implemented an automated offline benchmarking pipeline.
 
 * **Methodology:** A "Golden Dataset" of 12 ground-truth Q&A pairs covering Behavioral, Technical (ML/Security), and Personal domains.
@@ -90,11 +90,11 @@ python bulk_benchmark.py
 ```
 See [benchmark_results.csv](./evaluation/benchmark_results.csv) for the raw data.
 
-## 📂 Project Structure
+## >> Project Structure
 * `src/server.ts`: Main Worker and Durable Object logic (RAG implementation).
 * `src/client.tsx`: React frontend.
 * `evaluation/`: Python benchmarking scripts and datasets.
 * `wrangler.jsonc`: Cloudflare configuration (Vectorize bindings, Assets).
 
-## 🤖 AI Assistance
+## >> AI Assistance
 Prompts used during development are documented in [PROMPTS.md](./PROMPTS.md).
